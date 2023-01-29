@@ -7,7 +7,7 @@ const isDev = process.env.NODE_ENV === 'development';
 
 const baseConfig = {
   entry: {
-    main: path.resolve(__dirname, './src/main.ts'),
+    main: path.resolve(__dirname, './src/index.ts'),
   },
   mode: 'development',
   devServer: {
@@ -53,7 +53,7 @@ const baseConfig = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, './src/main.html'),
+      template: path.resolve(__dirname, './src/index.html'),
       filename: 'index.html',
     }),
     new CleanWebpackPlugin(),
@@ -70,9 +70,7 @@ const baseConfig = {
 
 module.exports = ({ mode }) => {
   const isProductionMode = mode === 'prod';
-  const envConfig = isProductionMode
-    ? require('./webpack.prod.config')
-    : require('./webpack.dev.config');
+  const envConfig = isProductionMode ? require('./webpack.prod.config') : require('./webpack.dev.config');
 
   return merge(baseConfig, envConfig);
 };
